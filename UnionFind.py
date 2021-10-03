@@ -4,9 +4,10 @@ class UnionFind:
 
 
         self.rep=[0]*(len(arr)+1)
-        
+        self.sizeof=[0]*(len(arr)+1)
         for e in arr:
             self.rep[e]=e 
+            self.sizeof[e]=1
         return 
     def find(self,a):
         if a>(len(self.rep)-1):
@@ -26,10 +27,12 @@ class UnionFind:
         
         if (self.rep1==self.rep2):
             return  
-        else:
-            self.rep[a]=self.rep2 
+        
+        if self.sizeof[self.rep1]>self.sizeof[self.rep2]:
+            self.rep1,self.rep2=self.rep2,self.rep1
+        self.rep[self.rep1]=self.rep2 
+        self.sizeof[self.rep2]+=self.sizeof[self.rep1]
         return 
-
 
 
 
